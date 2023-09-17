@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">My Food App</string>
+    <string name="tv_dang_ky">Chưa có tài khoản? <font color='#FF9800'> Đăng ký</font></string>
+    <string name="tv_dang_nhap">Đã có tài khoản? <font color='#FF9800'> Đăng nhập</font></string>
 </resources>
