@@ -76,6 +76,32 @@ public class ApiHelper {
             });
         }
     }
+    public void UpdatePass( String id, String password, StringCallback res) {
+        if (api != null) {
+            api.updatePass( id, password).enqueue(new Callback<ResponeSignUp>() {
+                @Override
+                public void onResponse(Call<ResponeSignUp> call, Response<ResponeSignUp> response) {
+                    if (response.isSuccessful()) {
+                        if (response.body() != null) {
+                            res.execute(new Gson().toJson( response.body()) );
+                            Log.d( "TAGa", "onResponse: 1" +response.body() );
+                        } else {
+                            res.execute("");
+                            Log.d( "TAGa", "onResponse: 2" );
+                        }
+                    } else {
+                        res.execute("");
+                        Log.d( "TAGa", "onResponse: 3" );
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponeSignUp> call, Throwable t) {
+                    res.execute("");
+                }
+            });
+        }
+    }
 
     private interface ApiService {
         @POST("getSignIn/functionGetUser.php")
@@ -93,6 +119,13 @@ public class ApiHelper {
         Call<ResponeSignUp> dangky(
                 @Field("email") String email,
                 @Field("password") String password);
+
+        @POST("getUser/update_pass.php")
+        @FormUrlEncoded
+        Call<ResponeSignUp> updatePass(
+                @Field("id") String id,
+                @Field("password") String password
+        );
 
     }
 
