@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">My Food App</string>
+    <string name="home">Đồ ăn</string>
+    <string name="cart">Giỏ hàng</string>
+    <string name="history">Lịch sử</string>
+    <string name="logout">Đăng xuất</string>
 </resources>
