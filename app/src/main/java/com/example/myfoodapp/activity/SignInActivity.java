@@ -40,10 +40,6 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void onClickLisner() {
-        binding.tvForgetPass.setOnClickListener( view -> {
-            Intent intent = new Intent( SignInActivity.this, ForgetPasswordActivity2.class );
-            startActivity( intent );
-        } );
         binding.tvSignUp.setOnClickListener( view -> {
             Intent intent = new Intent( SignInActivity.this, SignUpActivity.class );
             startActivity( intent );
