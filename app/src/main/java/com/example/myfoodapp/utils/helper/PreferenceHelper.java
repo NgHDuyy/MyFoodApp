@@ -53,11 +53,7 @@ public class PreferenceHelper {
     public void setUser(String strUser) {
         sharedPreferences.edit().putString(User, strUser).apply();
     }
-    public void dangXuat() {
-        sharedPreferences.edit()
-                .putString("user", null)
-                .apply();
-    }
+
 
 
 
