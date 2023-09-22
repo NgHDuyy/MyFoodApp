@@ -44,13 +44,22 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String str_email = binding.edtEmail.getText().toString().trim();
                 String str_password = binding.edtPass.getText().toString().trim();
+                String str_name =binding.edtName.getText().toString().trim();
+                String str_phone =binding.edtPhone.getText().toString().trim();
+                String str_address =binding.edtAddress.getText().toString().trim();
                 if (TextUtils.isEmpty(str_email)) {
                     Toast.makeText(getApplicationContext(), "Bạn chưa nhập Email", Toast.LENGTH_SHORT).show();
                 } else if (TextUtils.isEmpty(str_password)) {
                     Toast.makeText(getApplicationContext(), "Bạn chưa nhập mật khẩu", Toast.LENGTH_SHORT).show();
-                } else {
+                } else if (TextUtils.isEmpty(str_name)) {
+                    Toast.makeText(getApplicationContext(), "Bạn chưa nhập tên người dùng", Toast.LENGTH_SHORT).show();
+                }else if (TextUtils.isEmpty(str_phone)) {
+                    Toast.makeText(getApplicationContext(), "Bạn chưa nhập số điện thoại", Toast.LENGTH_SHORT).show();
+                }else if (TextUtils.isEmpty(str_address)) {
+                    Toast.makeText(getApplicationContext(), "Bạn chưa nhập địa chỉ", Toast.LENGTH_SHORT).show();
+                }else {
                     if (str_password.equals(str_password)) {
-                        new ApiHelper().signUp( str_email, str_password, new StringCallback() {
+                        new ApiHelper().signUp( str_email, str_password,str_name,str_phone,str_address, new StringCallback() {
                             @Override
                             public void execute(String str) {
                                 if (!str.isEmpty()){

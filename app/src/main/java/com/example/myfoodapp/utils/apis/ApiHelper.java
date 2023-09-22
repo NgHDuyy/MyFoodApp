@@ -50,9 +50,9 @@ public class ApiHelper {
             }
         });
     }
-    public void signUp( String email, String password, StringCallback res) {
+    public void signUp( String email, String password,String userName,String phoneNumber,String address, StringCallback res) {
         if (api != null) {
-            api.dangky( email, password).enqueue(new Callback<ResponeSignUp>() {
+            api.dangky( email, password,userName,phoneNumber,address).enqueue(new Callback<ResponeSignUp>() {
                 @Override
                 public void onResponse(Call<ResponeSignUp> call, Response<ResponeSignUp> response) {
                     if (response.isSuccessful()) {
@@ -76,7 +76,7 @@ public class ApiHelper {
             });
         }
     }
-    public void UpdatePass( String id, String password, StringCallback res) {
+    public void UpdatePass( String id, String password,StringCallback res) {
         if (api != null) {
             api.updatePass( id, password).enqueue(new Callback<ResponeSignUp>() {
                 @Override
@@ -84,14 +84,12 @@ public class ApiHelper {
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
                             res.execute(new Gson().toJson( response.body()) );
-                            Log.d( "TAGa", "onResponse: 1" +response.body() );
+
                         } else {
                             res.execute("");
-                            Log.d( "TAGa", "onResponse: 2" );
                         }
                     } else {
                         res.execute("");
-                        Log.d( "TAGa", "onResponse: 3" );
                     }
                 }
 
@@ -102,11 +100,37 @@ public class ApiHelper {
             });
         }
     }
+    public  void SignIn(String email, String password, StringCallback res){
+        if (api!=null){
+            api.dangnhap( email,password ).enqueue( new Callback<GetUserResponse>() {
+                @Override
+                public void onResponse(Call<GetUserResponse> call, Response<GetUserResponse> response) {
+                    if (response.isSuccessful()){
+                        if (response.body() != null) {
+                            res.execute(new Gson().toJson( response.body()) );
+
+                        } else {
+                            res.execute("");
+                        }
+                    }else {
+                        res.execute("");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<GetUserResponse> call, Throwable t) {
+                    res.execute("");
+                }
+            } );
+        }
+    }
+
+
 
     private interface ApiService {
         @POST("getSignIn/functionGetUser.php")
         @FormUrlEncoded
-        Call<ResponeObject> dangnhap(
+        Call<GetUserResponse> dangnhap(
                 @Field("username") String username,
                 @Field("password") String password);
 
@@ -118,13 +142,18 @@ public class ApiHelper {
         @FormUrlEncoded
         Call<ResponeSignUp> dangky(
                 @Field("email") String email,
-                @Field("password") String password);
+                @Field("password") String password,
+                @Field("userName") String userName,
+                @Field("phoneNumber") String phoneNumber,
+                @Field("address") String address
+        );
 
         @POST("getUser/update_pass.php")
         @FormUrlEncoded
         Call<ResponeSignUp> updatePass(
                 @Field("id") String id,
                 @Field("password") String password
+
         );
 
     }

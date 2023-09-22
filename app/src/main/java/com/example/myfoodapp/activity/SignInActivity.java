@@ -55,15 +55,15 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void dangNhap() {
-        getListUser();
-        clickLogin();
+        String str_email = binding.edtEmail.getText().toString().trim();
+        String str_password = binding.edtPass.getText().toString().trim();
+        getListUser(str_email,str_password);
+        clickLogin(str_email,str_password);
     }
 
-    private void clickLogin() {
-        String strEmail =binding.edtEmail.getText().toString().trim();
-        String strPassword = binding.edtPass.getText().toString().trim();
-
+    private void clickLogin( String strEmail, String strPassword) {
         if (mListUser == null || mListUser.isEmpty()) {
+            Toast.makeText(SignInActivity.this, "Email hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -91,8 +91,19 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
 
-    private void getListUser() {
-        new ApiHelper().getListUser(str -> {
+//    private void getListUser() {
+//        new ApiHelper().getListUser(str -> {
+//            if (str.isEmpty()) {
+//                mListUser = new ArrayList<>();
+//            } else {
+//                Type type = new TypeToken<List<User>>() {
+//                }.getType();
+//                mListUser = new Gson().fromJson(str, type);
+//            }
+//        });
+//    }
+    private void getListUser(String email, String password){
+        new ApiHelper().SignIn( email, password, str -> {
             if (str.isEmpty()) {
                 mListUser = new ArrayList<>();
             } else {
@@ -100,6 +111,6 @@ public class SignInActivity extends AppCompatActivity {
                 }.getType();
                 mListUser = new Gson().fromJson(str, type);
             }
-        });
+        } );
     }
 }
