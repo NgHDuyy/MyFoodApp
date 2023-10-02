@@ -107,8 +107,8 @@ public class ApiHelper {
                 public void onResponse(Call<GetUserResponse> call, Response<GetUserResponse> response) {
                     if (response.isSuccessful()){
                         if (response.body() != null) {
-                            res.execute(new Gson().toJson( response.body()) );
-
+                            Log.d( "TAGa", "onResponse: " +  new Gson().toJson( response.body().getData()) );
+                            res.execute(new Gson().toJson( response.body().getData()) );
                         } else {
                             res.execute("");
                         }
@@ -128,11 +128,12 @@ public class ApiHelper {
 
 
     private interface ApiService {
-        @POST("getSignIn/functionGetUser.php")
+        @POST("signIn/functionGetUser.php")
         @FormUrlEncoded
         Call<GetUserResponse> dangnhap(
-                @Field("username") String username,
-                @Field("password") String password);
+                @Field("email") String email,
+                @Field("password") String password
+        );
 
         @GET("getSignIn/readGetUser.php")
         Call<GetUserResponse> getListUser();

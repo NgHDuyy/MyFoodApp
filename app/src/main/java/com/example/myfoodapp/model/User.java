@@ -1,10 +1,15 @@
 package com.example.myfoodapp.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
 
-    private String id;
+    @SerializedName("userId")
+    @Expose
+    private int id;
     private String email;
     private String password;
     private String userName;
@@ -14,7 +19,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String id, String email, String password, String userName, String phoneNumber, String address) {
+    public User(int id, String email, String password, String userName, String phoneNumber, String address) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -23,11 +28,11 @@ public class User implements Serializable {
         this.address = address;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -33,7 +33,7 @@ public class PreferenceHelper {
         }
         if (user != null){
             switch (type){
-                case 0: return user.getId();
+                case 0: return String.valueOf( user.getId() );
                 case 1: return user.getEmail();
                 default: return "";
             }

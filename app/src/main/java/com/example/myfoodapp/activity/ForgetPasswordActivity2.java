@@ -53,7 +53,7 @@ public class ForgetPasswordActivity2 extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Bạn chưa nhập lại mật khẩu mới", Toast.LENGTH_SHORT).show();
                 } else {
                     if (str_new_password.equals(str_confirmPass)) {
-                        new ApiHelper().UpdatePass(user.getId() , str_confirmPass, new StringCallback() {
+                        new ApiHelper().UpdatePass( String.valueOf( user.getId() ), str_confirmPass, new StringCallback() {
                             @Override
                             public void execute(String str) {
                                 if (!str.isEmpty()){

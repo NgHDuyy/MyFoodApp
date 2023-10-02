@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import com.example.myfoodapp.utils.apis.ApiHelper;
 import com.example.myfoodapp.utils.helper.PreferenceHelper;
 import com.example.myfoodapp.utils.listener.StringCallback;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -54,11 +56,11 @@ public class SignInActivity extends AppCompatActivity {
         String str_email = binding.edtEmail.getText().toString().trim();
         String str_password = binding.edtPass.getText().toString().trim();
         getListUser(str_email,str_password);
-        clickLogin(str_email,str_password);
     }
 
     private void clickLogin( String strEmail, String strPassword) {
         if (mListUser == null || mListUser.isEmpty()) {
+            Log.d( "TAGa", "clickLogin: 2" );
             Toast.makeText(SignInActivity.this, "Email hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -98,15 +100,23 @@ public class SignInActivity extends AppCompatActivity {
 //            }
 //        });
 //    }
-    private void getListUser(String email, String password){
-        new ApiHelper().SignIn( email, password, str -> {
-            if (str.isEmpty()) {
-                mListUser = new ArrayList<>();
-            } else {
+private void getListUser(String email, String password) {
+    new ApiHelper().SignIn(email, password, str -> {
+        if (str == null || str.isEmpty()) {
+            mListUser = new ArrayList<>();
+        } else {
+            try {
                 Type type = new TypeToken<List<User>>() {
                 }.getType();
                 mListUser = new Gson().fromJson(str, type);
+                Log.d( "TAGa", "getListUser: 1" + str + " _ " + new Gson().toJson( mListUser ) );
+                clickLogin(email,password);
+            } catch (JsonSyntaxException e) {
+                Log.d( "TAGa", "getListUser: " + e.getMessage() );
+                mListUser = new ArrayList<>();
+                e.printStackTrace();
             }
-        } );
-    }
+        }
+    });
+}
 }

@@ -18,6 +18,12 @@ public class GetUserResponse {
     @Expose
     private List<User> data;
 
+    public GetUserResponse(Integer status, String message, List<User> data) {
+        this.status = status;
+        this.message = message;
+        this.data = data;
+    }
+
     public Integer getStatus() {
         return status;
     }
