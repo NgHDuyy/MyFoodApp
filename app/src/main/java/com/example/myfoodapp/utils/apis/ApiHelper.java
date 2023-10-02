@@ -76,7 +76,7 @@ public class ApiHelper {
             });
         }
     }
-    public void UpdatePass( String id, String password,StringCallback res) {
+    public void UpdatePass( int id, String password,StringCallback res) {
         if (api != null) {
             api.updatePass( id, password).enqueue(new Callback<ResponeSignUp>() {
                 @Override
@@ -149,10 +149,10 @@ public class ApiHelper {
                 @Field("address") String address
         );
 
-        @POST("getUser/update_pass.php")
+        @POST("update_pass.php")
         @FormUrlEncoded
         Call<ResponeSignUp> updatePass(
-                @Field("id") String id,
+                @Field("userId") int userId,
                 @Field("password") String password
 
         );
