@@ -4,23 +4,23 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-            <TextView
-                android:id="@+id/ic_back"
-                android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                android:background="@color/red"
-                android:gravity="center"
-                android:text="Liên hệ"
-                android:textColor="@color/white"
-                android:textSize="25sp"
-                android:textStyle="bold" />
+    <TextView
+        android:id="@+id/ic_back"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/red"
+        android:gravity="center"
+        android:text="Liên hệ"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
-      <ImageView
-          android:layout_width="150dp"
-          android:layout_height="150dp"
-          android:layout_gravity="center"
-          android:src="@drawable/iconcallphone"
-          android:layout_marginTop="30dp"/>
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:src="@drawable/iconcallphone"
+        android:layout_marginTop="30dp"/>
     <TextView
         android:id="@+id/tvfullname"
         android:layout_width="wrap_content"
